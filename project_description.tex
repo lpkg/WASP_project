@@ -1,0 +1,23 @@
+\documentclass[12pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage{cite}
+
+\title{Autonomous Calibration of 3D Computer Vision System - Project Proposal}
+\author{Lissy Pellaco, Xuechun Xu, Mina Ferizbegovic, Håkan Carlsson}
+\date{September 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Task definition}
+Lissy Pellaco, Xuechun Xu, Mina Ferizbegovic will take the task of designing and implementing auto-calibration algorithm of multi-camera system, given the rotation matrix and translation vector of the camera system, estimated from IMU data. They will use simulated data for testing the algorithm.
+ 
+\section{Planning}
+\begin{itemize}
+\item single-camera scenario - using simulated 3D world points with known coordinates and pinhole camera model;
+\item multi-camera scenario - using data and models same as above;
+\item self-calibration algorithm -  using simulated 3D world feature points and lines. Exploiting the use of multiple cameras of known position we will remove as much a priori knowledge as possible.
+\end{itemize}
+
+\end{document}
