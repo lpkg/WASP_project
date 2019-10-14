@@ -40,7 +40,7 @@ def find_F(u,norm_op=True):
     uu,ss,vv = np.linalg.svd(F)
     min_i = np.argmin(np.abs(ss))
     ss[min_i] = 0
-    F = np.matmul(uu,np.matmul(np.diag(ss),vv.T))
+    F = np.matmul(uu,np.matmul(np.diag(ss),vv))
 
     if norm_op:
         F = np.matmul(A1.T,np.matmul(F,A2))
