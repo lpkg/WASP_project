@@ -78,4 +78,5 @@ for x in X:
   x = np.append(x,[1])
   camera_1_points.append(generate_a_point_from_camera(x,P_1))
   camera_2_points.append(generate_a_point_from_camera(x,P_2))
+  
 
