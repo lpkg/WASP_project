@@ -9,7 +9,7 @@ def estimate_lambda(Ws, list_F):
        and Fundamental matrices.
     """
 
-    n = Ws.shape[0]/3
+    n = int(Ws.shape[0]//3)
     m = Ws.shape[1]
     Lambda = np.ones((n, m))
     for i in range(n-1):

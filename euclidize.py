@@ -10,7 +10,7 @@ def euclidize(Ws, Lambda, P, X):
        and Fundamental matrices.
     """
 
-    n = Ws.shape[0]/3
+    n = int(Ws.shape[0]//3)
     m = Ws.shape[1]
 
     #Compute B
@@ -39,7 +39,7 @@ def euclidize(Ws, Lambda, P, X):
     u, s, v = svd(Temp)
     V = v.T
     B = V[:, 3]
-    print B
+
 
     #Compute A
     Temp = np.array([])
@@ -81,19 +81,20 @@ def euclidize(Ws, Lambda, P, X):
         u, s, v = svd(np.append(Temp, b))
         V = v.T
         q = -V[:, V.shape[1]-1]
-    print q
-    Q = np.matrix([[q[0], q[1], q[2], q[3]], [q[2], q[4], q[5], q[6]], [q[2], q[5], q[7], q[8]], [q[3], q[6], q[8], q[9]]])
+    print(q)
+    Q = np.matrix([[q[0], q[1], q[2], q[3]], [q[1], q[4], q[5], q[6]], [q[2], q[5], q[7], q[8]], [q[3], q[6], q[8], q[9]]])
     M = np.matmul(P[0:3, :], Q)
     M = np.matmul(M, P[0:3, :].T)
+    print(M)
     if M[0,0]<=0:
         q = -q
-        Q = np.matrix([[q[0], q[1], q[2], q[3]], [q[2], q[4], q[5], q[6]], [q[2], q[5], q[7], q[8]], [q[3], q[6], q[8], q[9]]])
+        Q = np.matrix([[q[0], q[1], q[2], q[3]], [q[1], q[4], q[5], q[6]], [q[2], q[5], q[7], q[8]], [q[3], q[6], q[8], q[9]]])
     u, s, v = svd(Q)
     S = np.zeros((3, 3))
     for i in range(3):
         S[i, i] = math.sqrt(s[i])
 
-
+    print(S)
     A = np.matmul(u[:, 0:3], S)
     B = np.reshape(B, (4, 1))
     H = np.append(A, B, axis = 1)
