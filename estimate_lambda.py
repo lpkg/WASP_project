@@ -4,7 +4,7 @@ from numpy.linalg import svd
 from epipolar import epipolar
 from numpy import linalg as LA
 
-def estimate_lambda(Ws, list_F):
+def estimate_lambda(Ws, list_F, list_i):
     """Estimate some initial projective depth given the measurement matrix Ws
        and Fundamental matrices.
     """
@@ -14,9 +14,9 @@ def estimate_lambda(Ws, list_F):
     Lambda = np.ones((n, m))
     for i in range(n-1):
         j = i+1
-        F = list_F[i][0]
+        F = list_F[i]
         e = epipolar(F)
-        for p in list_F[i][1]:
+        for p in list_i[i]:
             p = p - 1
             q_ip = Ws[3*i:3*i+3, p]
             q_jp = Ws[3*j:3*j+3, p]
@@ -25,3 +25,4 @@ def estimate_lambda(Ws, list_F):
             tmp2 = np.dot(np.matmul(F.T, q_jp), np.cross(e, q_ip))
             Lambda[j, p] = Lambda[i, p]/tmp2.sum()*tmp1
     return Lambda
+
