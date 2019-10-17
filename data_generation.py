@@ -34,6 +34,10 @@ angle_x_2 = degree_to_radiant(0)
 angle_y_2 = degree_to_radiant(72)
 angle_z_2 = degree_to_radiant(10)
 
+angle_x_3 = degree_to_radiant(0)
+angle_y_3 = degree_to_radiant(30)
+angle_z_3 = degree_to_radiant(45)
+
 #Focal lengths and principal components of camera 1 and camera 2
 
 f_1 = 5
@@ -44,24 +48,34 @@ f_2 = 3
 x_0_2 = 50
 y_0_2 = 130
 
+f_3 = 10
+x_0_3 = 50
+y_0_3 = 100
+
+
 t_1 = [1, 0, 1] # in cm
 t_2 = [1, 1, 0] # in cm
+t_3 = [1, 1, 1] # in cm
+
 
 R_1 = total_rotation(angle_x_1,angle_y_1,angle_z_1)
 
 R_2 = total_rotation(angle_x_2,angle_y_2,angle_z_2)
 
-
+R_3 = total_rotation(angle_x_3,angle_y_3,angle_z_3)
 
 K_1 = [[f_1,0,x_0_1],[0, f_1, y_0_1],[0,0,1]]
 
 K_2 = [[f_2,0,x_0_2],[0, f_2, y_0_2],[0,0,1]]
 
+K_3 = [[f_3,0,x_0_3],[0, f_3, y_0_3],[0,0,1]]
 
 
 P_1 = np.matmul(K_1,np.column_stack((R_1,t_1)))
 
 P_2 = np.matmul(K_2,np.column_stack((R_2,t_2)))
+
+P_3 = np.matmul(K_3,np.column_stack((R_3,t_3)))
 
 # 3-D world point
 
@@ -71,6 +85,8 @@ camera_1_points=[]
 
 camera_2_points=[]
 
+camera_3_points=[]
+
 X = np.random.randint(0,10,3*number_of_points).reshape(number_of_points,3,1)
 
 for x in X:
@@ -78,5 +94,10 @@ for x in X:
   x = np.append(x,[1])
   camera_1_points.append(generate_a_point_from_camera(x,P_1))
   camera_2_points.append(generate_a_point_from_camera(x,P_2))
-  
+  camera_3_points.append(generate_a_point_from_camera(x,P_3))
+	  
+np.savetxt('camera_1',camera_1_points,delimiter=',')
+np.savetxt('camera_2',camera_2_points,delimiter=',')
+np.savetxt('camera_3',camera_3_points,delimiter=',')
+
 
