@@ -26,17 +26,17 @@ def generate_a_point_from_camera(X,P):
   temp = np.matmul(P,X)
   return temp/temp[-1]
 
-angle_x_1 = degree_to_radiant(30)
+angle_x_1 = degree_to_radiant(0)
 angle_y_1 = degree_to_radiant(0)
-angle_z_1 = degree_to_radiant(45)
+angle_z_1 = degree_to_radiant(0)
 
-angle_x_2 = degree_to_radiant(0)
-angle_y_2 = degree_to_radiant(72)
-angle_z_2 = degree_to_radiant(10)
+angle_x_2 = degree_to_radiant(-45)
+angle_y_2 = degree_to_radiant(0)
+angle_z_2 = degree_to_radiant(0)
 
-angle_x_3 = degree_to_radiant(0)
-angle_y_3 = degree_to_radiant(30)
-angle_z_3 = degree_to_radiant(45)
+angle_x_3 = degree_to_radiant(45)
+angle_y_3 = degree_to_radiant(0)
+angle_z_3 = degree_to_radiant(0)
 
 #Focal lengths and principal components of camera 1 and camera 2
 
@@ -53,9 +53,9 @@ x_0_3 = 50
 y_0_3 = 100
 
 
-t_1 = [1, 0, 1] # in cm
-t_2 = [1, 1, 0] # in cm
-t_3 = [1, 1, 1] # in cm
+t_1 = [0, 0, 0] 
+t_2 = [0, np.sqrt(2), np.sqrt(2)] 
+t_3 = [1, -np.sqrt(2), np.sqrt(2)] 
 
 
 R_1 = total_rotation(angle_x_1,angle_y_1,angle_z_1)
@@ -87,10 +87,11 @@ camera_2_points=[]
 
 camera_3_points=[]
 
-X = np.random.randint(0,10,3*number_of_points).reshape(number_of_points,3,1)
+X = (np.random.rand(2*number_of_points).reshape(number_of_points,2,1))*np.sqrt(2)*2.0 - np.sqrt(2)
 
 for x in X:
   
+  x = np.append(x,np.random.rand(1)*10 + np.sqrt(2))# maximum point on z-axis is 10 + sqrt(2)
   x = np.append(x,[1])
   camera_1_points.append(generate_a_point_from_camera(x,P_1))
   camera_2_points.append(generate_a_point_from_camera(x,P_2))
