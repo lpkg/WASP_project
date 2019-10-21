@@ -35,7 +35,6 @@ def find_F(u,norm_op=True):
         Z[i,:] = np.matmul(u1[:,i].reshape(-1,1),u2[:,i].reshape(1,-1)).reshape(1,9,order='F')
     M = np.matmul(Z.T,Z)
     ev,vec = np.linalg.eigh(M)
-    import pdb; pdb.set_trace()
     F = vec[:,np.argsort(ev)[0]].reshape(3,3,order='F')
     uu,ss,vv = np.linalg.svd(F)
     min_i = np.argmin(np.abs(ss))
